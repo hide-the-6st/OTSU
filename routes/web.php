@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+Auth::routes();
+
+Route::get('/', 'PostController@index')->name('posts.index');
+
+Route::resource('posts', 'PostController')->except(['index']);
