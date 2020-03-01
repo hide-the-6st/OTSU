@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Http\Requests\PostRequest;
+//use Illuminate\Validation\Validator;
 
 class PostController extends Controller
 {
@@ -14,8 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        $posts->load('user');
+        $posts = Post::latest()->paginate(3);
+        //$posts->load('user');
 
         return view('posts.index', [
           'posts' => $posts,
@@ -38,9 +40,18 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        //$this->validate($request, Post::$rules);
+        $post = new Post;
+        $post->user_id = $request->user_id;
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
+
+        //Post::create($request->all());
+
+        return redirect()->route('posts.index');
     }
 
     /**

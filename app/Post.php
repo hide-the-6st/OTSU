@@ -7,9 +7,18 @@ use App\User;
 
 class Post extends Model
 {
+
+    protected $guarded = array('id');
+
     protected $fillable = [
-    'id', 'user_id', 'title', 'content',
+      'user_id', 'title', 'content',
   ];
+
+  /*public static $rules = array(
+    'user_id' => 'required',
+    'name' => 'required',
+    'content' => 'text|required',
+  );*/
 
   public function user(){
     return $this->belongsTo(\App\User::class, 'user_id');
