@@ -10,6 +10,15 @@
   @endif
   <div class="card">
     <div class="card-body">
+      @if($errors->any())
+      <div>
+        <ul>
+          @foreach($errors->all() as $error)
+          <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
       <form action="{{ route('posts.store') }}" method="POST">
         @csrf
         <div class="form-group">
@@ -23,7 +32,10 @@
           placeholder="本文を入力してください" name="content"></textarea>
         </div>
 
+        <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('posts.index' )}}">トップページへ戻る</a>
       </form>
     </div>
   </div>
