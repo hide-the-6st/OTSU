@@ -15,7 +15,7 @@
       <h5 class="card-author">投稿者: {{ $post->user->name }}</h5>
       <p class="card-text">本文: {{ $post->content }}</p>
       <p class="card-timestamps">投稿日時: {{ $post->created_at->format('Y/m/d') }}</p>
-      <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">詳細</a>
+      <a href="{{ route('posts.show', $post) }}" class="btn btn-primary">詳細</a>
     </div>
   </div>
   @endforeach
