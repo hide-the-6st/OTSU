@@ -15,6 +15,11 @@
       <p class="card-text">本文: {{ $post->content }}</p>
       <p class="card-timestamps">投稿日時: {{ $post->created_at->format('Y/m/d') }}</p>
       <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary">編集</a>
+      <form action="{{ route('posts.destroy', $post) }}" method="POST">
+        @method('DELETE')
+        @csrf
+        <button onclick="return confirm('削除します。よろしいですか？')" class="btn btn-secondary">削除</botton>
+      </form>
       <input type="hidden" name="user_id" value="{{ Auth::id() }}">
     </div>
   </div>
