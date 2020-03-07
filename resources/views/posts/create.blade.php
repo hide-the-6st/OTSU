@@ -34,7 +34,7 @@
 
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">投稿</button>
         <a href="{{ route('posts.index' )}}">トップページへ戻る</a>
       </form>
     </div>
