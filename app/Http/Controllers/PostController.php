@@ -51,7 +51,7 @@ class PostController extends Controller
 
         //Post::create($request->all());
 
-        return redirect()->route('posts.index')->with('status', '新しく投稿しました。');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -95,7 +95,7 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->save();
 
-        return redirect()->route('posts.index')->with('status', '投稿を編集しました。');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -107,6 +107,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('posts.index')->with('status', '投稿を削除しました。');
+        return redirect()->route('posts.index');
     }
 }
