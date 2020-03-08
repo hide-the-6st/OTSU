@@ -20,3 +20,9 @@ Auth::routes();
 Route::get('/', 'PostController@index')->name('posts.index');
 
 Route::resource('posts', 'PostController');//->except(['index', 'create', 'store']);
+
+
+Route::group(['middleware' => 'auth'], function(){
+  Route::get('comments/create', 'CommentController@create')->name('comments.create');
+  Route::post('comments/store', 'CommentController@store')->name('comments.store');
+});

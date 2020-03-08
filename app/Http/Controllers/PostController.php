@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Http\Requests\PostRequest;
+use App\Comment;
 //use Illuminate\Validation\Validator;
 
 class PostController extends Controller
@@ -62,7 +63,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-      $post->load('user');
+      $post->load('user', 'comment');
 
       return view('posts.show', [
         'post' => $post,
