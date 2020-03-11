@@ -19,7 +19,7 @@
         </ul>
       </div>
       @endif
-      <form action="{{ route('posts.store') }}" method="POST">
+      <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
           <label for="exampleInputTitle">title:</label>
@@ -30,6 +30,10 @@
           <label for="exampleInputText">comment:</label>
           <textarea class="form-control" id="exampleInputComment" aria-describedby="commentHelp"
           placeholder="本文を入力してください" name="content"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputFile">file:</label>
+          <input type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp" name="files">
         </div>
 
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
