@@ -12,8 +12,11 @@
     <div class="card-body">
       <h5 class="card-author">投稿者: {{ $post->user->name }}</h5>
       <h5 class="card-title">タイトル: {{ $post->title }}</h5>
-      <h5 class="card-text">本文: {{ $post->content }}</p>
-        <p class="card-timestamps">投稿日時: {{ $post->created_at->format('Y/m/d') }}</p>
+      <h5 class="card-text">本文: {{ $post->content }}</h5>
+        <img src="{{ asset($post->image) }}" alt="" class="card-img-top">
+        <br>
+        <br>
+        <h5 class="card-timestamps">投稿日時: {{ $post->created_at->format('Y/m/d') }}</h5>
         <div class="d-flex">
           <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary ml-1">編集</a>
           <form action="{{ route('posts.destroy', $post) }}" method="POST">
@@ -32,7 +35,7 @@
           <div class="card-body">
             <h5 class="card-author">投稿者: {{ $comment->user->name }}</h5>
             <p class="card-text">本文: {{ $comment->comment }}</p>
-            <p class="card-timestamps">投稿日時: {{ $post->created_at->format('Y/m/d') }}</p>
+            <p class="card-timestamps">投稿日時: {{ $comment->created_at->format('Y/m/d') }}</p>
           </div>
         </div>
         @endforeach

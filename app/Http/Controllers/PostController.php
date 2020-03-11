@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Http\Requests\PostRequest;
 use App\Comment;
-//use Illuminate\Validation\Validator;
+use Storage;
 
 class PostController extends Controller
 {
@@ -45,10 +45,14 @@ class PostController extends Controller
     {
         //$this->validate($request, Post::$rules);
         $post = new Post;
+        $path = Storage::putFile('public', $request->file('files'));
+        $url = Storage::url($path);
         $post->user_id = $request->user_id;
         $post->title = $request->title;
         $post->content = $request->content;
+        $post->image = $url;
         $post->save();
+        
 
         //Post::create($request->all());
 

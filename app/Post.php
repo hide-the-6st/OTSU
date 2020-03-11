@@ -12,7 +12,7 @@ class Post extends Model
     protected $guarded = array('id');
 
     protected $fillable = [
-      'user_id', 'title', 'content',
+      'user_id', 'title', 'content', 'image',
   ];
 
   /*public static $rules = array(
@@ -26,6 +26,6 @@ class Post extends Model
   }
 
   public function comment(){
-    return $this->hasMany(\App\Comment::class,'post_id', 'id');
+    return $this->hasMany(\App\Comment::class, 'post_id', 'id');
   }
 }
