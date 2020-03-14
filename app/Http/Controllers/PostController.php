@@ -49,17 +49,17 @@ class PostController extends Controller
         if($request->hasFile('files') && $image->isValid()){
           $file_name = $image->getClientOriginalName();
           $path = $request->file('files')->storeAs('public', $file_name);
-          $url = Storage::url($path);
+          $path = Storage::url($path);
+        }else{
+          $path = null;
         }
 
         $post = new Post;
         $post->user_id = $request->user_id;
         $post->title = $request->title;
         $post->content = $request->content;
-        $post->image = $url;
+        $post->image = $path;
         $post->save();
-
-
 
         return redirect()->route('posts.index')->with('status', '新しく投稿しました。');
     }
@@ -99,10 +99,22 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+      $image = $request->file('files');
+
+      if($request->hasFile('files') && $image->isValid()){
+        $file_name = $image->getClientOriginalName();
+        $path = $request->file('files')->storeAs('public', $file_name);
+        $path = Storage::url($path);
+      }
+
         $post = Post::findOrFail($id);
         $post->user_id = $request->user_id;
         $post->title = $request->title;
         $post->content = $request->content;
+        if($request->hasFile('files')){
+          $post->image = $path;
+        }
         $post->save();
 
         return redirect()->route('posts.index')->with('status', '投稿を編集しました。');
