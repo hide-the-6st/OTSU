@@ -43,18 +43,23 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        //$this->validate($request, Post::$rules);
+
+        $image = $request->file('files');
+
+        if($request->hasFile('files') && $image->isValid()){
+          $file_name = $image->getClientOriginalName();
+          $path = $request->file('files')->storeAs('public', $file_name);
+          $url = Storage::url($path);
+        }
+
         $post = new Post;
-        $path = Storage::putFile('public', $request->file('files'));
-        $url = Storage::url($path);
         $post->user_id = $request->user_id;
         $post->title = $request->title;
         $post->content = $request->content;
         $post->image = $url;
         $post->save();
-        
 
-        //Post::create($request->all());
+
 
         return redirect()->route('posts.index')->with('status', '新しく投稿しました。');
     }
