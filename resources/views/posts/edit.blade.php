@@ -19,7 +19,7 @@
         </ul>
       </div>
       @endif
-      <form action="{{ route('posts.update', $post ?? '') }}" method="POST">
+      <form action="{{ route('posts.update', $post ?? '') }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
         <div class="form-group">
@@ -31,6 +31,10 @@
           <label for="exampleInputText">comment:</label>
           <textarea class="form-control" id="exampleInputComment" aria-describedby="commentHelp"
           value="{{ $post->content }}" name="content">{{ $post->content }}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputFile">file:</label>
+          <input type="file" class="form-control" id="exampleInputFile" aria-describedby="fileHelp" name="files">
         </div>
 
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
