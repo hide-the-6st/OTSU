@@ -15,12 +15,6 @@ class Post extends Model
       'user_id', 'title', 'content', 'image',
   ];
 
-  /*public static $rules = array(
-    'user_id' => 'required',
-    'name' => 'required',
-    'content' => 'text|required',
-  );*/
-
   public function user(){
     return $this->belongsTo(\App\User::class, 'user_id');
   }
