@@ -11,3 +11,15 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .DS_Store
+/resources/*
+!/resources/js/
+!/resources/lang/
+/resources/lang/*
+!resources/lang/ja
+!/resources/lang/en
+!/resources/sass
+!/resources/views
+/public/*
+!/public/css
+!/public/js
+!/public/storage
