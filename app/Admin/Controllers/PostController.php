@@ -33,7 +33,6 @@ class PostController extends AdminController
         $grid->column('image', __('Image'))->image();
         $grid->column('created_at', __('Created at'))->sortable();
         $grid->column('updated_at', __('Updated at'));
-
         return $grid;
     }
 
@@ -51,7 +50,7 @@ class PostController extends AdminController
         $show->field('user_id', __('User id'));
         $show->field('title', __('Title'));
         $show->field('content', __('Content'));
-        $show->field('image', __('Image'));
+        $show->field('image', __('Image'))->image();
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -68,9 +67,9 @@ class PostController extends AdminController
         $form = new Form(new Post());
 
         $form->number('user_id', __('User id'));
-        $form->textarea('title', __('Title'));
-        $form->textarea('content', __('Content'));
-        $form->textarea('image', __('Image'));
+        $form->text('title', __('Title'));
+        $form->text('content', __('Content'));
+        $form->image('image', __('Image'));
 
         return $form;
     }

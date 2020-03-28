@@ -59,6 +59,7 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->content = $request->content;
         $post->image = $path;
+
         $post->save();
 
         return redirect()->route('posts.index')->with('status', '新しく投稿しました。');
@@ -73,7 +74,6 @@ class PostController extends Controller
     public function show(Post $post)
     {
       $post->load('user', 'comment');
-
       return view('posts.show', [
         'post' => $post,
       ]);
