@@ -27,8 +27,8 @@
           placeholder="タイトルを入力してください(必須ではありません)" name="title">
         </div>
         <div class="form-group">
-          <label for="exampleInputText">comment:</label>
-          <textarea class="form-control" id="exampleInputComment" aria-describedby="commentHelp"
+          <label for="exampleInputContent">content:</label>
+          <textarea class="form-control" id="exampleInputContent" aria-describedby="contentHelp"
           placeholder="本文を入力してください" name="content"></textarea>
         </div>
         <div class="form-group">

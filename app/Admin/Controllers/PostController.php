@@ -33,6 +33,7 @@ class PostController extends AdminController
         $grid->column('image', __('Image'))->image();
         $grid->column('created_at', __('Created at'))->sortable();
         $grid->column('updated_at', __('Updated at'));
+
         return $grid;
     }
 
@@ -53,6 +54,7 @@ class PostController extends AdminController
         $show->field('image', __('Image'))->image();
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
+        dd($show);
 
         return $show;
     }
