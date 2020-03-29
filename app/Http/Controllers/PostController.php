@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Http\Requests\PostRequest;
 use App\Comment;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -48,7 +48,7 @@ class PostController extends Controller
 
         if($request->hasFile('files') && $image->isValid()){
           $file_name = $image->getClientOriginalName();
-          $path = $request->file('files')->storeAs('public', $file_name);
+          $path = $image->storeAs('public', $file_name, ['disk' => 'local']);
           $path = Storage::url($path);
         }else{
           $path = null;
