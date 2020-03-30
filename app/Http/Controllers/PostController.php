@@ -49,7 +49,7 @@ class PostController extends Controller
         if($request->hasFile('files') && $image->isValid()){
           $file_name = $image->getClientOriginalName();
           $path = $image->storeAs('public', $file_name, ['disk' => 'local']);
-          $path = Storage::url($path);
+          $path = asset("storage/$file_name");
         }else{
           $path = null;
         }
