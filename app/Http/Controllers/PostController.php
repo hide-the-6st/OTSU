@@ -7,6 +7,8 @@ use App\Post;
 use App\Http\Requests\PostRequest;
 use App\Comment;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Otsu;
 
 class PostController extends Controller
 {
@@ -73,10 +75,22 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-      $post->load('user', 'comment');
-      return view('posts.show', [
-        'post' => $post,
-      ]);
+      $post->load('user', 'comment', 'otsus');
+      $userAuth = \Auth::user();
+
+      $defaultCount = count($post->otsus);
+      $defaultOtsu = $post->otsus->where('user_id', $userAuth->id);
+      if(count($defaultOtsu) == 0){
+        $defaultOtsu == false;
+      }else{
+        $defaultOtsu == true;
+      }
+        return view('posts.show', [
+          'post' => $post,
+          'userAuth' => $userAuth,
+          'defaultOtsu' => $defaultOtsu,
+          'defaultCount' => $defaultCount,
+        ]);
     }
 
     /**

@@ -1947,12 +1947,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['postId'],
+  props: ['postId', 'userId', 'defaultOtsu', 'defaultCount'],
+  data: function data() {
+    return {
+      otsud: false,
+      otsuCount: 0
+    };
+  },
+  created: function created() {
+    this.otsud = this.defaultOtsu;
+    this.otsuCount = this.defaultCount;
+  },
   methods: {
-    submit: function submit(postId) {
+    otsu: function otsu(postId) {
+      var _this = this;
+
       var url = "/api/posts/".concat(postId, "/otsu");
-      axios.post(url).then(function (response) {})["catch"](function (error) {
+      axios.post(url, {
+        user_id: this.userId
+      }).then(function (response) {
+        _this.otsud = true;
+        _this.otsuCount = response.data.otsuCount;
+      })["catch"](function (error) {
+        alert(error);
+      });
+    },
+    unotsu: function unotsu(postId) {
+      var _this2 = this;
+
+      var url = "/api/posts/".concat(postId, "/unotsu");
+      axios.post(url, {
+        user_id: this.userId
+      }).then(function (response) {
+        _this2.otsud = false;
+        _this2.otsuCount = response.data.otsuCount;
+      })["catch"](function (error) {
         alert(error);
       });
     }
@@ -37379,19 +37410,33 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        attrs: { type: "button" },
-        on: {
-          click: function($event) {
-            return _vm.submit(_vm.postId)
-          }
-        }
-      },
-      [_vm._v("お疲れ様です！")]
-    )
+    !_vm.otsud
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.otsu(_vm.postId)
+              }
+            }
+          },
+          [_vm._v("お疲れ様です！" + _vm._s(_vm.otsuCount))]
+        )
+      : _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.unotsu(_vm.postId)
+              }
+            }
+          },
+          [_vm._v("お疲れ様です！" + _vm._s(_vm.otsuCount))]
+        )
   ])
 }
 var staticRenderFns = []
@@ -49579,6 +49624,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

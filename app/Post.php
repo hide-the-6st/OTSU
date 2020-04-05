@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Comment;
+use App\Otsu;
 
 class Post extends Model
 {
@@ -21,5 +22,9 @@ class Post extends Model
 
   public function comment(){
     return $this->hasMany(\App\Comment::class, 'post_id', 'id');
+  }
+
+  public function otsus(){
+    return $this->hasMany(\App\Otsu::class, 'post_id', 'id');
   }
 }

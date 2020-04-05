@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOtsuTable extends Migration
+class CreateOtsusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateOtsuTable extends Migration
      */
     public function up()
     {
-        Schema::create('otsu', function (Blueprint $table) {
+        Schema::create('otsus', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user-id');
-            $table->integer('post-id');
+            $table->integer('user_id');
+            $table->integer('post_id');
 
-            $table->foreign('user-id')->references('id')->on('users');
-            $table->foreign('post-id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('post_id')->references('id')->on('posts');
             $table->timestamps();
         });
     }
