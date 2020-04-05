@@ -18,6 +18,12 @@
         <br>
         <h5 class="card-timestamps">投稿日時: {{ $post->created_at->format('Y/m/d') }}</h5>
         <div class="d-flex">
+            <otsu
+            :post-id="{{ json_encode($post->id) }}"
+            :user-id="{{ json_encode($userAuth->id) }}"
+            :default-Otsu="{{ json_encode($defaultOtsu) }}"
+            :default-Count="{{ json_encode($defaultCount) }}"
+            ></otsu>
           <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary ml-1">編集</a>
           <form action="{{ route('posts.destroy', $post) }}" method="POST">
             @method('DELETE')
