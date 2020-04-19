@@ -5,7 +5,8 @@
 - PHP 7.4.2
 - Laravel 7.5.2
 - HTML5
-- BootStrap4.4.1
+- BootStrap 4.4.1
+- SQLite 3.28.0
 
 ## 機能一覧
 - CRUD（新規投稿、投稿詳細、投稿編集、投稿削除）
